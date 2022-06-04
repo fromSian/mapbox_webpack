@@ -4,7 +4,7 @@ webpack.config.js webpack 的配置文件
 */
 const { resolve } = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { VueLoaderPlugin } = require("vue-loader"); 
+const { VueLoaderPlugin } = require("vue-loader");
 module.exports = {
   //webpack配置
   /* 入口起点 */
@@ -12,7 +12,7 @@ module.exports = {
   //输出
   output: {
     /* 输出文件名 */
-    filename: "built.js",
+    filename: "index.js",
     /* 输出路径
     __dirname 是nodejs的变量,代表当前文件的目录绝对路径
     */
@@ -21,17 +21,18 @@ module.exports = {
   resolve: {
     extensions: [".js", ".json", ".mjs", ".vue", "ts"],
     alias: {
-      "@": resolve(__dirname, "../src")
-    }
+      "@": resolve(__dirname, "../src"),
+    },
   },
   //loader的配置
   module: {
     rules: [
       //详细loader配置
-      {   //大概从14开始，就需要插件来支持使用vue-loader，如果不安装，就改下package.json里的vue-loader版本，然后npm install
+      {
+        //大概从14开始，就需要插件来支持使用vue-loader，如果不安装，就改下package.json里的vue-loader版本，然后npm install
         test: /\.vue$/,
-        use: ['vue-loader']
-    },
+        use: ["vue-loader"],
+      },
       {
         //匹配哪些文件
         test: /\.css$/,
@@ -54,6 +55,14 @@ module.exports = {
           "less-loader",
         ],
       },
+      {
+        test: /\.(png|jpg|jpeg|gif)$/,
+        use: "file-loader",
+      },
+      {
+        test: /\.(mp3|wav|wma|ape|aac)$/i,
+        use: ["file-loader"],
+      },
     ],
   },
   //plugins(插件的配置)
@@ -73,13 +82,20 @@ module.exports = {
   //模式 只能写一种
   mode: "development", //开发模式
   //mode:'production'  //发布模式
-  devServer:{
-    static:resolve(__dirname,'dist'),
+  devServer: {
+    static: resolve(__dirname, "dist"),
     //开启gzip压缩
-    compress:true,
+    compress: true,
     //端口
-    port:1234,
+    port: 1234,
     //自动打开浏览器
-    open: true
-  }
+    open: true,
+    // host: "0.0.0.0",
+    // client: {
+    //   webSocketURL: "ws://0.0.0.0:1234/ws",
+    // },
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+    },
+  },
 };
