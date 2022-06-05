@@ -1,28 +1,35 @@
 <!--  -->
 <template>
-  <mapFirst/>
+  <csslearn />
+  <jsl />
+  <jqlearn />
+  <rollPics />
+  <t />
 </template>
 
 <script>
-import { reactive,toRefs,onMounted} from 'vue';
-import mapFirst from './mapbox/mapFirst.vue'
+import { reactive, toRefs, onMounted } from "vue";
+import t from "./htmlTest/t.vue";
+import rollPics from "./htmlTest/rollPics.vue";
+import jqlearn from "./htmlTest/jqlearn.vue";
+import jsl from "./htmlTest/jsl.vue";
+import csslearn from "./htmlTest/csslearn.vue";
+import declare from "./htmlTest/declare";
 export default {
-    name: '',
-      components: { mapFirst },
-      setup() {
-          const data = reactive({
+  name: "",
+  components: { t, rollPics, jqlearn, jsl, csslearn },
+  setup() {
+    const data = reactive({});
+    onMounted(() => {
+      declare();
+    });
+    const refData = toRefs(data);
+    console.log("thisapp", this);
 
-          })
-          onMounted(() => {
-            //   control()
-          })
-          const refData = toRefs(data);
-          return {
-              ...refData,
-          }
-
-      }
-  };
+    return {
+      ...refData,
+    };
+  },
+};
 </script>
-<style>
-</style>
+<style></style>
