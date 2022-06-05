@@ -44,6 +44,7 @@
 </template>
 
 <script>
+var gl = "fl";
 import $ from "jquery";
 import { onMounted } from "@vue/runtime-core";
 export default {
@@ -55,7 +56,7 @@ export default {
       $("#p_show").click(showp);
       $("tr:even").css("background-color", "green");
       $("tr:odd").css("background-color", "pink");
-      console.log($("div"));
+      console.log("times", $("div"));
       $("tr").hover(function () {
         console.log("this", $(this));
         $(this).css("background-color", "white");
@@ -109,9 +110,9 @@ export default {
 a:target {
   background-color: green;
 }
-div:empty {
+/* div:empty {
   width: 10px;
   height: 10px;
   background-color: yellow;
-}
+} */
 </style>
